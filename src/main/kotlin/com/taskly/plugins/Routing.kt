@@ -5,23 +5,25 @@ import com.taskly.Repository.repo
 import com.taskly.authentication.JWTService
 import com.taskly.authentication.hash
 import com.taskly.data.model.User
-import com.taskly.routes.UserRoutes
 import io.ktor.server.application.*
+import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
+
+
     routing {
         get("/") {
             call.respondText("Hello Dhruv!")
         }
 
-        get("/token"){
+        get("/token") {
             val email = call.request.queryParameters["email"]!!
             val password = call.request.queryParameters["password"]!!
             val username = call.request.queryParameters["username"]!!
 
-            val user = User(email, hash(password),username)
+            val user = User(email, hash(password), username)
             call.respond(JWTService().generateToken(user))
         }
 

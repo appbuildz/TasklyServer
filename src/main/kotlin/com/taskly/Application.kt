@@ -4,7 +4,6 @@ import com.taskly.Repository.DatabaseFactory
 import com.taskly.Repository.repo
 import com.taskly.authentication.JWTService
 import com.taskly.authentication.hash
-import com.taskly.data.model.User
 import com.taskly.plugins.*
 import com.taskly.routes.UserRoutes
 import io.ktor.server.application.*
@@ -24,7 +23,6 @@ fun Application.module() {
     val db = repo()
     val jwtService = JWTService()
     val hashFunction = { s: String -> hash(s) }
-
 
     routing {
         UserRoutes(db, jwtService, hashFunction)
