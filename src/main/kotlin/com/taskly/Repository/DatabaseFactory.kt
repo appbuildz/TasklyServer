@@ -1,6 +1,7 @@
 package com.taskly.Repository
 
-import com.taskly.data.table.userTable
+import com.taskly.data.table.TaskTable
+import com.taskly.data.table.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,8 @@ object DatabaseFactory {
         Database.connect(hikari())
 
         transaction {
-            SchemaUtils.create(userTable)
+            SchemaUtils.create(UserTable)
+            SchemaUtils.create(TaskTable)
         }
 
     }

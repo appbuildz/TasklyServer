@@ -2,7 +2,7 @@ package com.taskly.data.table
 
 import org.jetbrains.exposed.sql.Table
 
-object userTable : Table() {
+object UserTable : Table() {
 
     val email = varchar("email",512)
     val password = varchar("password",512)

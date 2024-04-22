@@ -12,7 +12,7 @@ class JWTService {
     private val algorithm = Algorithm.HMAC512(jwtSecret)
 
 
-    val varifier: JWTVerifier = JWT
+    val verifier: JWTVerifier = JWT
         .require(algorithm)
         .withIssuer(issuer)
         .build()

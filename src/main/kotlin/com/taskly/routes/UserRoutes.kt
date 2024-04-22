@@ -1,6 +1,6 @@
 package com.taskly.routes
 
-import com.taskly.Repository.repo
+import com.taskly.Repository.Repo
 import com.taskly.authentication.JWTService
 import com.taskly.data.model.LoginRequest
 import com.taskly.data.model.RegisterRequest
@@ -15,7 +15,7 @@ import io.ktor.server.request.*
 import io.ktor.server.routing.post
 
 const val API_VERSION = "/v1"
-const val USERS = "$API_VERSION/users"
+const val USERS = "$API_VERSION/user"
 const val REGISTER_REQUEST = "$USERS/register"
 const val LOGIN_REQUEST = "$USERS/login"
 
@@ -26,7 +26,7 @@ class UserLoginRoutes
 class UserRegisterRoutes
 
 fun Route.UserRoutes(
-    db:repo,
+    db: Repo,
     jwtService:JWTService,
     hashFunction: (String) -> String
 ) {
@@ -35,7 +35,7 @@ fun Route.UserRoutes(
         call.respondText("Welcome to Taskly API!", ContentType.Text.Plain)
     }
 
-    post("/v1/users/register") {
+    post(REGISTER_REQUEST) {
         val registerRequest = try {
             call.receive<RegisterRequest>()
         } catch (ex: Exception) {
@@ -53,7 +53,7 @@ fun Route.UserRoutes(
     }
 
 
-    post("/v1/users/login") {
+    post(LOGIN_REQUEST) {
         val loginRequest = try {
             call.receive<LoginRequest>()
         } catch (e: Exception) {
